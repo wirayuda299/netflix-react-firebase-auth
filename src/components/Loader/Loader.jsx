@@ -1,4 +1,3 @@
-import loading from '../../assets/img/loading.gif';
 const Loader = () => {
   return (
     <div className='w-full h-screen bg-black fixed '>
