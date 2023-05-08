@@ -5,6 +5,7 @@ import OurStory from '../../components/OurStory/OurStory';
 import WatchOnDevice from '../../components/WatchOnDevice/WatchOnDevice';
 import WatchOnTv from '../../components/WatchOnTv/WatchOnTv';
 import Footer from '../../components/Footer/Footer';
+
 const Home = () => {
   return (
     <>

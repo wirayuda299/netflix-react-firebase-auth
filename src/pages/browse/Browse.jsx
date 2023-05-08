@@ -7,30 +7,16 @@ import axios from 'axios';
 import Header from '../../components/Header/Header';
 import { AiOutlineSearch } from 'react-icons/ai';
 import defaultProfile from '../../assets/img/default.png';
+import { endpoints } from '../../data/endpoints';
+
 
 const Browse = () => {
-  const endpoints = [
-    {
-      title: 'Genre',
-      url: ' https://api.themoviedb.org/3/genre/movie/list?api_key=e7ed38578356fd9faa517326267b9f07&language=id-ID',
-    },
-    {
-      title: 'Trending',
-      url: 'https://api.themoviedb.org/3/trending/all/day?api_key=e7ed38578356fd9faa517326267b9f07',
-    },
-    {
-      title: 'Popular Tv Shows In Indonesia',
-      url: 'https://api.themoviedb.org/3/tv/popular?api_key=e7ed38578356fd9faa517326267b9f07&language=id-ID&page=1',
-    },
-    {
-      title: 'Top Rated',
-      url: 'https://api.themoviedb.org/3/tv/top_rated?api_key=e7ed38578356fd9faa517326267b9f07&language=id-ID&page=1',
-    },
-  ];
+ 
   const [topRated, setTopRated] = useState([]);
   const [trending, setTrending] = useState([]);
   const [genres, setGenres] = useState([]);
   const [populerTvShows, setPopulerTvShows] = useState([]);
+  const [loading, setLoading] = useState(true);
 
 
   useEffect(() => {
@@ -49,12 +35,21 @@ const Browse = () => {
         setTrending(response[1].results);
         setPopulerTvShows(response[2].results);
         setTopRated(response[3].results);
+        setLoading(false);
       });
   }, []);
 
   const { addToWatchList, user } =
     useAuthContext();
   const slicedEmail = user?.email?.slice(0, user?.email?.indexOf('@'));
+
+  if (loading) {
+    return (
+      <div className='w-full h-screen flex justify-center items-center'>
+        <div className='animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-gray-900'></div>
+      </div>
+    );
+  }
   return (
     <div className='w-full h-full'>
       <Header add='border-b border-gray-600'>
